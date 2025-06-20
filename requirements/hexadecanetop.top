@@ -1,0 +1,12 @@
+#define RUBBER_BANDS
+#include "martini_v3.0.0.itp"
+#include "martini_v3.0.0_ions_v1.itp"
+#include "martini_v3.0.0_solvents_v1.itp"
+
+[ system ]
+; name
+logP challenge in water
+[ molecules ]
+; name  number
+HD 3501
+W               11972
