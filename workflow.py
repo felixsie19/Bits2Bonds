@@ -5,7 +5,7 @@ import rl
 import pandas as pd
 from bead_exchanger import exchange_beads
 import sys
-
+from Utils.make_pdf import make_pdf_file
 
 # Specify the output file
 output_file = "output.txt"
@@ -66,6 +66,9 @@ with open(output_file, 'w') as f:
             print("Success: At least one performance score is greater than 9.")
             df[['performance_score', 'Performance_siRNA_pH_4', 'Performance_double_membrane', 'Performance_siRNA_pH_8',
                'beads_hydro', 'beads_lipo']].to_csv(f"output_df_episode_{i}.csv")
+            
+            #make PDF
+            make_PDF_file()
             sys.exit(0)  # Exit with a success code (0)
         else:
             print("Continuing: No performance score is greater than 9.")
