@@ -8,6 +8,10 @@ from utils import exchange_beads
 import sys
 
 
+##################Set Name of Gromacs Binary##########################
+
+binary_name=sys.argv[1]
+
 # Specify the output file
 output_file = "./data/output.txt"
 
@@ -43,7 +47,7 @@ with open(output_file, 'w') as f:
         if os.path.exists("./data/DFfromRL.pkl"):
             try:
                 os.environ['ITERATION_NUMBER'] = str(i)
-                subprocess.run(["python3", "./utils/multithread.py"] ,check=True)  # Will raise exception on error
+                subprocess.run(["python3", "./utils/multithread.py", binary_name], check=True)
                 print(f"Finished iteration {i+1}")
             except subprocess.CalledProcessError as e:
                 print(f"Error in multithread.py: {e}")
