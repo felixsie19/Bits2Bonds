@@ -22,8 +22,8 @@ import signal
 from multithread import kill_processes_by_name
 
 
-##################Set Name of Gromacs Binary##########################
-binary_name="gmx_plu"
+
+binary_name=sys.argv[3]
 ################## Creation of directory and defining the directory name################
 
 with open('./data/DFfromRL.pkl', 'rb') as f:
