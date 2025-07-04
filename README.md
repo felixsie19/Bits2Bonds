@@ -75,3 +75,7 @@ Key parameters for the RL and GA processes can be adjusted within their respecti
 * `bead_exchanger.py`: Modifies polymer bead structures based on pH and predicted pKa.
 * `make_pdf.py`: Creates a PDF report of the results.
 * `process_killer.sh`: A utility script to terminate any lingering GROMACS processes.
+
+## Support
+
+If you have questions or require support, please reach out to us : felsiph@cup.uni-muenchen.de or jonas.binder@cup.uni-muenchen.de
