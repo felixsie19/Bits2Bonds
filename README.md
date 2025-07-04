@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 This project has the following external dependencies that must be installed and configured correctly:
 
-1.  **GROMACS patched with PLUMED**: The molecular dynamics simulations are performed using GROMACS. It is essential that the GROMACS installation is patched with the PLUMED library to enable free-energy calculations. The scripts expect the patched GROMACS binary to be named `gmx_plu`.
+1.  **GROMACS patched with PLUMED**: The molecular dynamics simulations are performed using GROMACS. It is essential that the GROMACS installation is patched with the PLUMED library to enable free-energy calculations.
 2.  **PLUMED**: This is a community-developed, open-source library for free-energy calculations in molecular systems. It is used here as a plugin for GROMACS to perform enhanced sampling simulations and analyze the results. For detailed installation and documentation, please refer to the official PLUMED website: [https://www.plumed.org/doc](https://www.plumed.org/doc).
 
 ## How to Use
