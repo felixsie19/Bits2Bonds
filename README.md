@@ -1,6 +1,6 @@
-# Polymer Design with Reinforcement Learning and Genetic Algorithms
+# Bits 2 Bonds - Polymer Design with Reinforcement Learning and Genetic Algorithms
 
-This project utilizes a combination of reinforcement learning (RL), genetic algorithms (GA), and molecular dynamics (MD) simulations to design and optimize novel polymer structures for specific tasks, likely related to drug delivery (e.g., siRNA and membrane interactions).
+This project utilizes a combination of reinforcement learning (RL), genetic algorithms (GA), and molecular dynamics (MD) simulations to design and optimize novel polymer structures for siRNA drug delivery.
 
 The workflow appears to involve generating polymer sidechains using RL, evaluating their performance through GROMACS and PLUMED simulations, and then using a genetic algorithm to evolve the RL policies to create better-performing polymers over generations.
 
@@ -12,7 +12,7 @@ The workflow appears to involve generating polymer sidechains using RL, evaluati
     * Double membrane penetration.
     * siRNA binding at different pH values.
 * **pKa Prediction**: `PkaPred.py` uses a Graph Convolutional Network (GCN) built with PyTorch Geometric to predict the pKa values of the generated molecules, which is crucial for simulating behavior at different pH levels.
-* **Automated Workflow**: The `multithread.py` script appears to orchestrate the entire process, running the MD simulations in parallel, aggregating the results, calculating a final performance score, and feeding the results back into the GA/RL loop.
+* **Automated Workflow**: The `multithread.py` script orchestrates the entire process and implements the option to run the MD simulations in parallel, aggregating the results, calculating a final performance score, and feeding the results back into the GA/RL loop.
 * **Reporting**: The `make_pdf.py` script generates a PDF report visualizing the performance of the lead candidate over generations.
 
 ## Installation
@@ -32,7 +32,7 @@ This project has the following external dependencies that must be installed and 
 
 ## How It Works
 
-1.  **Initialization**: The process likely starts with an initial set of RL models (policies).
+1.  **Initialization**: The process starts with an initial set of RL models (policies).
 2.  **Molecule Generation**: For each generation, the RL models (`rl.py`) generate lipophilic and hydrophilic sidechains.
 3.  **Simulation & Evaluation**:
     * The `bead_exchanger.py` script adjusts the protonation state of the polymer beads based on the pH.
