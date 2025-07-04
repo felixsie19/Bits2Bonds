@@ -7,6 +7,7 @@ import signal
 import psutil
 import numpy as np
 from scipy.stats import trim_mean, iqr
+from .chains import binary_name
 
 iteration_number = int(os.environ.get('ITERATION_NUMBER'))
 def process_iteration(iteration_num, run):

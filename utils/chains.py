@@ -20,12 +20,10 @@ import shutil
 import traceback
 import signal
 from multithread import kill_processes_by_name
-##################Requirements############################
 
-# 1. File "backbone.gro"
-# 2. File "backbone.itp"
-# 3. Working version of plumed (compiled with prefix gmx_plu)
 
+##################Set Name of Gromacs Binary##########################
+binary_name="gmx_plu"
 ################## Creation of directory and defining the directory name################
 
 with open('./data/DFfromRL.pkl', 'rb') as f:
@@ -496,11 +494,11 @@ def double_membrane(bead_names_str,modified_file_path,double_membrane_file):
 
         # GROMACS simulation command
         # Replace this with the actual command you need to run
-        gmx_plu grompp -f ../../requirements/minimization.mdp -c {modified_file_path} -p top_{bead_names_str}_pH_8.top -o minim_{bead_names_str}.tpr 
-        gmx_plu mdrun -v -deffnm minim_{bead_names_str} -nt 4
-        gmx_plu solvate -cp minim_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_{bead_names_str}.gro -p top_{bead_names_str}_pH_8.top
-        gmx_plu grompp -p top_{bead_names_str}_pH_8.top -c solvated_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
-        gmx_plu mdrun -deffnm minimization_{bead_names_str} -v -nt 4 
+        {binary_name} grompp -f ../../requirements/minimization.mdp -c {modified_file_path} -p top_{bead_names_str}_pH_8.top -o minim_{bead_names_str}.tpr 
+        {binary_name} mdrun -v -deffnm minim_{bead_names_str} -nt 4
+        {binary_name} solvate -cp minim_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_{bead_names_str}.gro -p top_{bead_names_str}_pH_8.top
+        {binary_name} grompp -p top_{bead_names_str}_pH_8.top -c solvated_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
+        {binary_name} mdrun -deffnm minimization_{bead_names_str} -v -nt 4 
         """)
 
         # Path for the bash script
@@ -564,9 +562,9 @@ def double_membrane(bead_names_str,modified_file_path,double_membrane_file):
         bash_script_content = f"""#!/bin/bash
 
         # GROMACS simulation command
-        gmx_plu insert-molecules -f ../../requirements/hexadecane-md2.gro -ci minim_{bead_names_str}.gro -o dppc_{bead_names_str}.gro -nmol 1 -try 5000 -selrpos atom -ip ../../requirements/positions.dat 
-        gmx_plu grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c dppc_{bead_names_str}.gro  -r dppc_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr -maxwarn 2
-        gmx_plu mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
+        {binary_name} insert-molecules -f ../../requirements/hexadecane-md2.gro -ci minim_{bead_names_str}.gro -o dppc_{bead_names_str}.gro -nmol 1 -try 5000 -selrpos atom -ip ../../requirements/positions.dat 
+        {binary_name} grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c dppc_{bead_names_str}.gro  -r dppc_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr -maxwarn 2
+        {binary_name} mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
 
         """
 
@@ -630,28 +628,28 @@ def double_membrane(bead_names_str,modified_file_path,double_membrane_file):
             bash_script_content = f"""#!/bin/bash
 
             # GROMACS simulation command
-            gmx_plu grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -r minimization-vac_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
-            gmx_plu insert-molecules -f minimization-vac_{bead_names_str}.gro -ci ../../requirements/CL.pdb -o {bead_names_str}_CL.gro -nmol {total_charge}
+            {binary_name} grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -r minimization-vac_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
+            {binary_name} insert-molecules -f minimization-vac_{bead_names_str}.gro -ci ../../requirements/CL.pdb -o {bead_names_str}_CL.gro -nmol {total_charge}
             echo "CL   {total_charge}" >> top_{bead_names_str}_double_membrane.top
-            gmx_plu grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c {bead_names_str}_CL.gro  -r {bead_names_str}_CL.gro -o minimization-vac2_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization-vac2_{bead_names_str} -v -nt 4
-            gmx_plu solvate -cp minimization-vac2_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top
-            gmx_plu grompp -p top_{bead_names_str}_double_membrane.top -c solvated_{bead_names_str}.gro -r solvated_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization_{bead_names_str} -v -nt 4
-            gmx_plu grompp -f ../../requirements/martini_md.mdp -c minimization_{bead_names_str}.gro -r minimization_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top -o dppc_md_{bead_names_str}.tpr -maxwarn 2
+            {binary_name} grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c {bead_names_str}_CL.gro  -r {bead_names_str}_CL.gro -o minimization-vac2_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization-vac2_{bead_names_str} -v -nt 4
+            {binary_name} solvate -cp minimization-vac2_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top
+            {binary_name} grompp -p top_{bead_names_str}_double_membrane.top -c solvated_{bead_names_str}.gro -r solvated_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization_{bead_names_str} -v -nt 4
+            {binary_name} grompp -f ../../requirements/martini_md.mdp -c minimization_{bead_names_str}.gro -r minimization_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top -o dppc_md_{bead_names_str}.tpr -maxwarn 2
             """
         else:
                         # Bash script content
             bash_script_content = f"""#!/bin/bash
 
             # GROMACS simulation command
-            gmx_plu grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -r minimization-vac_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
-            gmx_plu solvate -cp minimization-vac_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top
-            gmx_plu grompp -p top_{bead_names_str}_double_membrane.top -c solvated_{bead_names_str}.gro -r solvated_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr -maxwarn 2
-            gmx_plu mdrun -deffnm minimization_{bead_names_str} -v -nt 4
-            gmx_plu grompp -f ../../requirements/martini_md.mdp -c minimization_{bead_names_str}.gro -r minimization_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top -o dppc_md_{bead_names_str}.tpr -maxwarn 2
+            {binary_name} grompp -p top_{bead_names_str}_double_membrane.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -r minimization-vac_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
+            {binary_name} solvate -cp minimization-vac_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top
+            {binary_name} grompp -p top_{bead_names_str}_double_membrane.top -c solvated_{bead_names_str}.gro -r solvated_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr -maxwarn 2
+            {binary_name} mdrun -deffnm minimization_{bead_names_str} -v -nt 4
+            {binary_name} grompp -f ../../requirements/martini_md.mdp -c minimization_{bead_names_str}.gro -r minimization_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top -o dppc_md_{bead_names_str}.tpr -maxwarn 2
             """
         # Path for the bash script
         bash_script_path = "charge_neutralisation+solvation.sh"
@@ -725,8 +723,8 @@ def double_membrane(bead_names_str,modified_file_path,double_membrane_file):
         # GROMACS simulation command
         rm *step*
         rm *#*
-        gmx_plu grompp -f ../../requirements/martini_md.mdp -c minimization_{bead_names_str}.gro -r minimization_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top -o plumed_{bead_names_str}.tpr -maxwarn 2
-        gmx_plu mdrun -deffnm plumed_{bead_names_str}  -plumed plumed_{bead_names_str}.dat -nt 4 -nsteps 125000
+        {binary_name} grompp -f ../../requirements/martini_md.mdp -c minimization_{bead_names_str}.gro -r minimization_{bead_names_str}.gro -p top_{bead_names_str}_double_membrane.top -o plumed_{bead_names_str}.tpr -maxwarn 2
+        {binary_name} mdrun -deffnm plumed_{bead_names_str}  -plumed plumed_{bead_names_str}.dat -nt 4 -nsteps 125000
         rm *step*
         echo done
         """)
@@ -774,7 +772,7 @@ def double_membrane(bead_names_str,modified_file_path,double_membrane_file):
         np.savetxt('WORK_double_membrane_to_zero', data_1_shifted, fmt='%.6f', newline='\n')
 
         # Calculate the integrated value of the shifted data
-        integrated_data_double_membrane = np.trapz(data_1_shifted, axis=0) / 100
+        integrated_data_double_membrane = np.trapezoid(data_1_shifted, axis=0) / 100
 
         # Save the minimum value to a file
 
@@ -841,10 +839,10 @@ def sirna_challenge(bead_names_str,modified_file_path,logfile,pH):
 
 
 
-        gmx_plu insert-molecules -f ../../requirements/RNA-CG.gro -ci {modified_file_path} -o rna_{bead_names_str}.gro -nmol 1 -try 5000 -selrpos atom -ip ../../requirements/positions_rna.dat
-        gmx_plu grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c rna_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr -maxwarn 1
-        gmx_plu mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
-        gmx_plu grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr -maxwarn 1
+        {binary_name} insert-molecules -f ../../requirements/RNA-CG.gro -ci {modified_file_path} -o rna_{bead_names_str}.gro -nmol 1 -try 5000 -selrpos atom -ip ../../requirements/positions_rna.dat
+        {binary_name} grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c rna_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr -maxwarn 1
+        {binary_name} mdrun -deffnm minimization-vac_{bead_names_str} -v -nt 4
+        {binary_name} grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -o minimization-vac_{bead_names_str}.tpr -maxwarn 1
 
         """
 
@@ -908,27 +906,27 @@ def sirna_challenge(bead_names_str,modified_file_path,logfile,pH):
             bash_script_content = f"""#!/bin/bash
 
 
-            gmx_plu insert-molecules -f minimization-vac_{bead_names_str}.gro -ci ../../requirements/NA.pdb -o {bead_names_str}_siRNA_CL.gro -nmol {total_charge}
+            {binary_name} insert-molecules -f minimization-vac_{bead_names_str}.gro -ci ../../requirements/NA.pdb -o {bead_names_str}_siRNA_CL.gro -nmol {total_charge}
             echo "NA   {total_charge}" >> top_{bead_names_str}_siRNA_challenge.top
-            gmx_plu grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c {bead_names_str}_siRNA_CL.gro -o minimization-vac2_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization-vac2_{bead_names_str} -v -nt 4
-            gmx_plu solvate -cp minimization-vac2_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_siRNA_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top
-            gmx_plu grompp -p top_{bead_names_str}_siRNA_challenge.top -c solvated_siRNA_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization_{bead_names_str} -v -nt 4
-            gmx_plu grompp -f ../../requirements/equilibration.mdp -c minimization_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top -o equilibration_siRNA_{bead_names_str}.tpr -maxwarn 2
-            gmx_plu mdrun -deffnm equilibration_siRNA_{bead_names_str} -v -nt 4
+            {binary_name} grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c {bead_names_str}_siRNA_CL.gro -o minimization-vac2_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization-vac2_{bead_names_str} -v -nt 4
+            {binary_name} solvate -cp minimization-vac2_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_siRNA_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top
+            {binary_name} grompp -p top_{bead_names_str}_siRNA_challenge.top -c solvated_siRNA_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization_{bead_names_str} -v -nt 4
+            {binary_name} grompp -f ../../requirements/equilibration.mdp -c minimization_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top -o equilibration_siRNA_{bead_names_str}.tpr -maxwarn 2
+            {binary_name} mdrun -deffnm equilibration_siRNA_{bead_names_str} -v -nt 4
 
             """
         else:
             bash_script_content = f"""#!/bin/bash
 
-            gmx_plu grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -o minimization-vac2_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization-vac2_{bead_names_str} -v -nt 4
-            gmx_plu solvate -cp minimization-vac2_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_siRNA_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top
-            gmx_plu grompp -p top_{bead_names_str}_siRNA_challenge.top -c solvated_siRNA_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
-            gmx_plu mdrun -deffnm minimization_{bead_names_str} -v -nt 4
-            gmx_plu grompp -f ../../requirements/equilibration.mdp -c minimization_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top -o equilibration_siRNA_{bead_names_str}.tpr -maxwarn 2
-            gmx_plu mdrun -deffnm equilibration_siRNA_{bead_names_str} -v -nt 4
+            {binary_name} grompp -p top_{bead_names_str}_siRNA_challenge.top -f ../../requirements/minimization.mdp -c minimization-vac_{bead_names_str}.gro -o minimization-vac2_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization-vac2_{bead_names_str} -v -nt 4
+            {binary_name} solvate -cp minimization-vac2_{bead_names_str}.gro -cs ../../requirements/water.gro -radius 0.21  -o solvated_siRNA_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top
+            {binary_name} grompp -p top_{bead_names_str}_siRNA_challenge.top -c solvated_siRNA_{bead_names_str}.gro -f ../../requirements/minimization.mdp -o minimization_{bead_names_str}.tpr
+            {binary_name} mdrun -deffnm minimization_{bead_names_str} -v -nt 4
+            {binary_name} grompp -f ../../requirements/equilibration.mdp -c minimization_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top -o equilibration_siRNA_{bead_names_str}.tpr -maxwarn 2
+            {binary_name} mdrun -deffnm equilibration_siRNA_{bead_names_str} -v -nt 4
             """
         # Path for the bash script
         bash_script_path = "charge_neutralisation+solvation_siRNA.sh"
@@ -1019,8 +1017,8 @@ def sirna_challenge(bead_names_str,modified_file_path,logfile,pH):
         # GROMACS simulation command
         rm *step*
         rm *#*
-        gmx_plu grompp -f ../../requirements/dynamic.mdp -c equilibration_siRNA_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top -o plumed_{bead_names_str}_siRNA.tpr -maxwarn 2 -r equilibration_siRNA_{bead_names_str}.gro 
-        gmx_plu mdrun -deffnm plumed_{bead_names_str}_siRNA  -plumed plumed_{bead_names_str}_siRNA.dat -nt 4 -nsteps 200000
+        {binary_name} grompp -f ../../requirements/dynamic.mdp -c equilibration_siRNA_{bead_names_str}.gro -p top_{bead_names_str}_siRNA_challenge.top -o plumed_{bead_names_str}_siRNA.tpr -maxwarn 2 -r equilibration_siRNA_{bead_names_str}.gro 
+        {binary_name} mdrun -deffnm plumed_{bead_names_str}_siRNA  -plumed plumed_{bead_names_str}_siRNA.dat -nt 4 -nsteps 200000
         rm *step*
         """
         # Path for the bash script
@@ -1066,7 +1064,7 @@ def sirna_challenge(bead_names_str,modified_file_path,logfile,pH):
         data_1_shifted = data_1 - data1_mean
         
         # Calculate the integrated value of the shifted data
-        integrated_data_siRNA = np.trapz(data_1_shifted, axis=0) / 100
+        integrated_data_siRNA = np.trapezoid(data_1_shifted, axis=0) / 100
         
         # Save the minimum value to a file
         np.savetxt('WORK_siRNA_min_to_zero', data_1_shifted, fmt='%.6f', newline='\n')
@@ -1188,7 +1186,7 @@ def clean_up_files(bead_names_str):
 def timeout_handler(signum, frame):
     logging.error("Script execution timed out after 1500 seconds.")
     # Optional cleanup actions if needed
-    kill_processes_by_name("gmx_plu")
+    kill_processes_by_name("{binary_name}")
     sys.exit(1)  # Exit with an error code
 
 if __name__ == "__main__":
