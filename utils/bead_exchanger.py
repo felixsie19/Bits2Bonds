@@ -1,7 +1,7 @@
 import copy
 import random
-import PkaPred
-from PkaPred import GCN
+from . import PkaPred
+from .PkaPred import GCN
 import torch
 import pandas as pd
 import numpy as np
@@ -19,13 +19,13 @@ def helper_function(smile):
     
     #load model acid
     model_acid = GCN()
-    model_acid.load_state_dict(torch.load('CGNN_params_carbox.pth'))
+    model_acid.load_state_dict(torch.load('./params/CGNN_params_carbox.pth'))
     #predict pka values
     #pka_values=PkaPred.predict_pka(smiles,model)
     pka_values_acid = PkaPred.predict_pka(smile,model_acid,mask_type="acid")
 
     model_base = GCN()
-    model_base.load_state_dict(torch.load('CGNN_params_new_amine.pth'))
+    model_base.load_state_dict(torch.load('./params/CGNN_params_new_amine.pth'))
     #predict pka values
     #pka_values=PkaPred.predict_pka(smiles,model)
     pka_values_base= PkaPred.predict_pka(smile,model_base,mask_type="base")

@@ -1,0 +1,48 @@
+#define RUBBER_BANDS
+#include "martini_v3.0.0.itp"
+#include "martini_v3.0.0_ions_v1.itp"
+#include "martini_v3.0.0_solvents_v1.itp"
+#include "martini_v3.0.0_phospholipids_mine.itp"
+#include "martini_v3.0_DPG3_02.itp"
+#include "martini_v3.0_DPG1_02.itp"
+#include "martini_v3.0_POPI_01.itp"
+#include "martini_v3.0_POP1_01.itp"
+#include "martini_v3.0_DPCE_01.itp"
+#include "martini_v3.0_PPC_02.itp"
+#include "martini_v3.0_PODG_01.itp"
+#include "martini_v3.0_sterols_v1.0.itp"
+
+[ system ]
+; name
+INSANE! Membrane UpperLeaflet>POPC:PIPC:POPE:PAPE:DPSM:DPG1:DPG3:DPCE:PPC:PODG:CHOL=461.0:679.0:93.0:85.0:613.0:82.0:82.0:27.0:41.0:26.0:995.0 LowerLeaflet>POPC:PIPC:POPE:PAPE:DPSM:POPS:PAPS:POPI:POPA:PIPA:POP1:DPCE:PODG:CHOL=207.0:305.0:396.0:364.0:275.0:97.0:223.0:137.0:24.0:21.0:46.0:15.0:17.0:848.0 in water
+
+[ molecules ]
+; name  number
+POPC            24
+PIPC            36
+POPE             4
+PAPE             4
+DPSM            32
+DPG1             4
+DPG3             4
+DPCE             1
+PPC              2
+PODG             1
+CHOL            52
+POPC            11
+PIPC            17
+POPE            22
+PAPE            20
+DPSM            15
+POPS             5
+PAPS            12
+POPI             7
+POPA             1
+PIPA             1
+POP1             2
+DPCE             0
+PODG             0
+CHOL            48
+CL		183
+NA		223
+W               12883

@@ -1,0 +1,11 @@
+pandas
+numpy
+matplotlib
+fpdf
+torch
+torch_geometric
+scikit-learn
+rdkit-pypi
+stable-baselines3
+gymnasium
+psutil

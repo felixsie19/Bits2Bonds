@@ -31,7 +31,7 @@ from stable_baselines3 import DQN
 from rdkit.Chem import Draw
 import torch
 import torch_geometric
-import bead_exchanger
+from utils import bead_exchanger
 import pandas as pd
 import pickle
 from datetime import datetime
@@ -198,6 +198,7 @@ class MoleculeDesigner:
                     atoms = mol.GetAtoms()
                     mol.AddBond(0, 31+mol1.GetNumAtoms(), order=Chem.BondType.SINGLE)
                     img=Draw.MolToImage(mol,size=(800,600))
+                    img.save("results/lead_0.png") 
                     #img.show()
                     lead=False
                 if show_mol=="always":
