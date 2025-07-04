@@ -32,10 +32,10 @@ This project has the following external dependencies that must be installed and 
 
 ## How to Use
 
-The main workflow is orchestrated by the `workflow.py` script. To start the process, run this script from the command line:
+The main workflow is orchestrated by the `workflow.py` script. To start the process, run this script from the command line (insert your plumed binary name as argument):
 
 ```bash
-python3 workflow.py
+python3 workflow.py <plumed_binary_name>
 ```
 
 This will initiate the cycle of molecule generation, simulation, scoring, and evolution.
