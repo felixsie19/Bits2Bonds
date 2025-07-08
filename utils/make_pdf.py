@@ -57,7 +57,7 @@ def make_pdf_file(i):
     pdf.ln(95)                         
 
 
-    png_path = Path(f"results/lead_{i}.png")
+    png_path = Path(f"results/lead_0.png")
     pdf.image(str(png_path), x=10, y=None, w=183)  
 
     pdf.output(str(pdf_path))
