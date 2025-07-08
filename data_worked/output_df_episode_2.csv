@@ -1,0 +1,3 @@
+,performance_score,Performance_siRNA_pH_4,Performance_double_membrane,Performance_siRNA_pH_8,beads_hydro,beads_lipo
+0,0.01836508068690894,-40.989955759999994,210.50437588,-14.052207460000002,"['anchor_bead', 'SN3a', 'SN3a', 'SN3a', 'SN3a', 'SN3a']","['anchor_bead', 'SP2']"
+1,0.001925762831943866,42.30997933500001,171.23291032,41.324655594999996,"['anchor_bead', 'TP1']","['anchor_bead', 'SP2']"
