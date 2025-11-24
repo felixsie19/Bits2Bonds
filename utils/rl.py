@@ -31,7 +31,7 @@ from stable_baselines3 import DQN
 from rdkit.Chem import Draw
 import torch
 import torch_geometric
-import bead_exchanger
+from utils import bead_exchanger
 import pandas as pd
 import pickle
 from datetime import datetime

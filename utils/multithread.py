@@ -5,15 +5,16 @@ import time
 import os
 import signal
 import psutil
+import sys
 import numpy as np
 from scipy.stats import trim_mean, iqr
-from sa_score_calculator import apply_sa_score_penalty
+from utils.sa_score_calculator import apply_sa_score_penalty
 
-
+binary_name=sys.arg[1]
 iteration_number = int(os.environ.get('ITERATION_NUMBER'))
 def process_iteration(iteration_num, run):
     try:
-        args = ["python3", "chains.py", str(iteration_num), str(run)]
+        args = ["python3", "./utils/chains.py", str(iteration_num), str(run)]
         print(f"Starting process for iteration {iteration_num}, run {run}: {args}")
         # Create the subprocess with a timeout
         process = subprocess.Popen(args)
@@ -40,7 +41,7 @@ def load_and_average_results(model_num):  # Removed the aggregation_method
     """
     dfs = []
     for run in range(3):
-        model_path = f"model_results/model_{model_num}_results_run{run}.pkl"
+        model_path = f"data/model_results/model_{model_num}_results_run{run}.pkl"
         if os.path.exists(model_path):
             df = pd.read_pickle(model_path)
             # Debugging: Check for expected columns
@@ -119,8 +120,7 @@ if __name__ == "__main__":
     y = df_filled['Performance_siRNA_pH_8']
     z = df_filled['Performance_double_membrane']
 
-    df_filled["performance_score"]=37.3917 * np.exp(-((x - (-40))**2 / (2 * 30**2) + (z - 155)**2 / (2 * 15**2) + (y - (-40))**2 / (2 * 25**2)))
-    #Gaussian_Reward = 37.3917 * exp(-((x - (-40))^2 / (2 * 30^2) + (z - 155)^2 / (2 * 15^2) + (y - (-40))^2 / (2 * 25^2)))
+    df_filled["performance_score"]=29.6052 * np.exp(-((x - (-40))**2 / (2 * 30**2) + (z - 155)**2 / (2 * 15**2) + (y - (-40))**2 / (2 * 25**2)))    #Gaussian_Reward = 37.3917 * exp(-((x - (-40))^2 / (2 * 30^2) + (z - 155)^2 / (2 * 15^2) + (y - (-40))^2 / (2 * 25^2)))
     # --- NEW: APPLY SA SCORE PENALTY HERE ---
     # The apply_sa_score_penalty function is imported from sa_score_calculator.py
     print("\n--- Applying Synthesizability Penalty ---")
@@ -131,18 +131,18 @@ if __name__ == "__main__":
     ############ Conversion block
     
     if iteration_number > 0:
-        df_external = pd.read_pickle(f"top_performer_{iteration_number-1}.pkl")
+        df_external = pd.read_pickle(f"data/top_performer_{iteration_number-1}.pkl")
         first_row = df_external.iloc[[0]]
         df_filtered = df_filled
         df_filtered = pd.concat([first_row, df_filtered], ignore_index=True)
         df_filtered.sort_values(by='performance_score', key=lambda x: x.abs(), ascending=False, inplace=True)
         top_performer = df_filtered.iloc[[0]].copy()  
-        top_performer.to_pickle(f"top_performer_{iteration_number}.pkl")
+        top_performer.to_pickle(f"data/top_performer_{iteration_number}.pkl")
     else:
         df_filtered = df_filled
         df_filtered.sort_values(by='performance_score', key=lambda x: x.abs(), ascending=False, inplace=True)
         top_performer = df_filtered.iloc[[0]].copy()  
-        top_performer.to_pickle(f"top_performer_{iteration_number}.pkl")
+        top_performer.to_pickle(f"data/top_performer_{iteration_number}.pkl")
     
     if 'performance_score' not in df_filled.columns:
         raise ValueError("The DataFrame does not contain a 'performance_score' column.")
@@ -150,13 +150,13 @@ if __name__ == "__main__":
 
     
     # Save the filtered DataFrame back to a pickle file
-    df_filtered.to_pickle("DFfromRL.pkl")
+    df_filtered.to_pickle("data/DFfromRL.pkl")
     print(df_filtered["performance_score"])
     print("Successfully pickled")
     # Cleanup old model files
     for model_num in range(1):
         for run in range(3):
-            model_path = f"model_results/model_{model_num}_results_run{run}.pkl"
+            model_path = f"data/model_results/model_{model_num}_results_run{run}.pkl"
             if os.path.exists(model_path):
                 os.remove(model_path)
                 print(f"Deleted {model_path}")
