@@ -1,14 +1,19 @@
 import subprocess
 import os.path
-from ga import new_GA
 import rl
 import pandas as pd
-from bead_exchanger import exchange_beads
+from utils import new_GA
+from utils import rl
+from utils import make_pdf
+from utils import exchange_beads
 import sys
 
+##################Set Name of Gromacs Binary##########################
+
+binary_name=sys.argv[1]
 
 # Specify the output file
-output_file = "output.txt"
+output_file = "./data/output.txt"
 
 # Open the file in write mode 'w'
 with open(output_file, 'w') as f:
@@ -34,15 +39,14 @@ with open(output_file, 'w') as f:
     print("Moldesigner ready")
     df=exchange_beads(8,df,0.5)
     df=exchange_beads(4,df,0.5)
-    df.to_pickle("DFfromRL.pkl")
-
+    df.to_pickle("./data/DFfromRL.pkl")
 ## 2. Check for the presence of 'model1.pkl'
     for i in range(0,50):
 
-        if os.path.exists("DFfromRL.pkl"):
+        if os.path.exists("./data/DFfromRL.pkl"):
             try:
                 os.environ['ITERATION_NUMBER'] = str(i)
-                subprocess.run(["python3", "multithread3.py"] ,check=True)  # Will raise exception on error
+                subprocess.run(["python3", "./utils/multithread.py", binary_name], check=True)
                 print(f"Finished iteration {i+1}")
             except subprocess.CalledProcessError as e:
                 print(f"Error in multithread.py: {e}")
@@ -89,7 +93,7 @@ with open(output_file, 'w') as f:
             print(ga.parents["performance_score"])
             output_df=ga.input_df
             output_df[['performance_score', 'Performance_siRNA_pH_4', 'Performance_double_membrane', 'Performance_siRNA_pH_8',
-               'beads_hydro', 'beads_lipo']].to_csv(f"output_df_episode_{i}.csv")
+               'beads_hydro', 'beads_lipo']].to_csv(f"./data/output_df_episode_{i}.csv")
             # Export lead and mutate
             ga.export_lead(i)
             new_pol = ga.mutate(2, 1)
@@ -99,7 +103,7 @@ with open(output_file, 'w') as f:
             df = exchange_beads(4, df, 0.5)
             # Remove duplicates before saving
             
-            df.to_pickle("DFfromRL.pkl")
+            df.to_pickle("./data/DFfromRL.pkl")
             print(f"Starting Challenges in iteration {i+1}")
             print(f"Starting iteration {i+1}",flush=True)
 
