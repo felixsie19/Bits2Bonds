@@ -14,7 +14,7 @@ binary_name=sys.argv[1]
 iteration_number = int(os.environ.get('ITERATION_NUMBER'))
 def process_iteration(iteration_num, run):
     try:
-        args = ["python3", "./utils/chains.py", str(iteration_num), str(run)]
+        args = ["python3", "./utils/chains.py", str(iteration_num), str(run),str(binary_name)]
         print(f"Starting process for iteration {iteration_num}, run {run}: {args}")
         # Create the subprocess with a timeout
         process = subprocess.Popen(args)
