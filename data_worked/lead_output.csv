@@ -1,0 +1,10 @@
+performance_score,beads_hydro,beads_lipo,generation
+0.01836508068690894,"['anchor_bead', 'SN3a', 'SN3a', 'SN3a', 'SN3a', 'SN3a']","['anchor_bead', 'SP2']",0
+0.01836508068690894,"['anchor_bead', 'SN3a', 'SN3a', 'SN3a', 'SN3a', 'SN3a']","['anchor_bead', 'SP2']",1
+0.01836508068690894,"['anchor_bead', 'SN3a', 'SN3a', 'SN3a', 'SN3a', 'SN3a']","['anchor_bead', 'SP2']",2
+0.01836508068690894,"['anchor_bead', 'SN3a', 'SN3a', 'SN3a', 'SN3a', 'SN3a']","['anchor_bead', 'SP2']",3
+16.307799872773078,"['anchor_bead', 'TN6d']","['anchor_bead', 'TC1', 'TC1', 'TC1', 'TC1', 'TC1']",4
+16.307799872773078,"['anchor_bead', 'TN6d']","['anchor_bead', 'TC1', 'TC1', 'TC1', 'TC1', 'TC1']",5
+16.307799872773078,"['anchor_bead', 'TN6d']","['anchor_bead', 'TC1', 'TC1', 'TC1', 'TC1', 'TC1']",6
+16.307799872773078,"['anchor_bead', 'TN6d']","['anchor_bead', 'TC1', 'TC1', 'TC1', 'TC1', 'TC1']",7
+16.307799872773078,"['anchor_bead', 'TN6d']","['anchor_bead', 'TC1', 'TC1', 'TC1', 'TC1', 'TC1']",8

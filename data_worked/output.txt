@@ -1,0 +1,229 @@
+Using cuda device
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+----------------------------------
+| rollout/            |          |
+|    ep_len_mean      | 2        |
+|    ep_rew_mean      | 1.5      |
+|    exploration_rate | 0.05     |
+| time/               |          |
+|    episodes         | 4        |
+|    fps              | 5        |
+|    time_elapsed     | 1        |
+|    total_timesteps  | 8        |
+----------------------------------
+Using cuda device
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+----------------------------------
+| rollout/            |          |
+|    ep_len_mean      | 1.25     |
+|    ep_rew_mean      | 1        |
+|    exploration_rate | 0.05     |
+| time/               |          |
+|    episodes         | 4        |
+|    fps              | 6        |
+|    time_elapsed     | 0        |
+|    total_timesteps  | 5        |
+----------------------------------
+Moldesigner ready
+Finished iteration 1
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  Performance_siRNA_pH_4  Performance_siRNA_pH_4                                  beads_hydro          beads_lipo
+0           0.018365                   210.504376              -40.989956              -40.989956  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]  [anchor_bead, SP2]
+   performance_score
+0           0.018365
+0    0.018365
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 1
+Starting iteration 1
+Finished iteration 2
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  Performance_siRNA_pH_4  Performance_siRNA_pH_4                                  beads_hydro          beads_lipo
+0           0.018365                   210.504376              -40.989956              -40.989956  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]  [anchor_bead, SP2]
+   performance_score
+0           0.018365
+0    0.018365
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 2
+Starting iteration 2
+Finished iteration 3
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  Performance_siRNA_pH_4  Performance_siRNA_pH_4                                  beads_hydro          beads_lipo
+0           0.018365                   210.504376              -40.989956              -40.989956  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]  [anchor_bead, SP2]
+1           0.001926                   171.232910               42.309979               42.309979                           [anchor_bead, TP1]  [anchor_bead, SP2]
+   performance_score
+0           0.018365
+1           0.001926
+0    0.018365
+1    0.001926
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 3
+Starting iteration 3
+Finished iteration 4
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  Performance_siRNA_pH_4  Performance_siRNA_pH_4                                  beads_hydro          beads_lipo
+0           0.018365                   210.504376              -40.989956              -40.989956  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]  [anchor_bead, SP2]
+1           0.000140                   143.927253               43.757756               43.757756                           [anchor_bead, TP1]  [anchor_bead, SP2]
+   performance_score
+0           0.018365
+1           0.000140
+0    0.018365
+1    0.000140
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 4
+Starting iteration 4
+Finished iteration 5
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  ...                                  beads_hydro                              beads_lipo
+1          16.307800                   140.030438  ...                          [anchor_bead, TN6d]  [anchor_bead, TC1, TC1, TC1, TC1, TC1]
+0           0.018365                   210.504376  ...  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]                      [anchor_bead, SP2]
+
+[2 rows x 6 columns]
+   performance_score
+1          16.307800
+0           0.018365
+1    16.307800
+0     0.018365
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 5
+Starting iteration 5
+Finished iteration 6
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  Performance_siRNA_pH_4  Performance_siRNA_pH_4          beads_hydro                              beads_lipo
+0          16.307800                   140.030438              -42.522083              -42.522083  [anchor_bead, TN6d]  [anchor_bead, TC1, TC1, TC1, TC1, TC1]
+1           0.466564                   173.817417                8.345626                8.345626  [anchor_bead, TN6d]                      [anchor_bead, SP2]
+   performance_score
+0          16.307800
+1           0.466564
+0    16.307800
+1     0.466564
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 6
+Starting iteration 6
+Finished iteration 7
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  ...                                  beads_hydro                               beads_lipo
+0          16.307800                   140.030438  ...                          [anchor_bead, TN6d]   [anchor_bead, TC1, TC1, TC1, TC1, TC1]
+1           0.115889                   200.806762  ...  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]  [anchor_bead, N5a, N5a, SN3a, N5a, N5a]
+
+[2 rows x 6 columns]
+   performance_score
+0          16.307800
+1           0.115889
+0    16.307800
+1     0.115889
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 7
+Starting iteration 7
+Finished iteration 8
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  Performance_siRNA_pH_4  Performance_siRNA_pH_4                         beads_hydro                                   beads_lipo
+0            16.3078                   140.030438              -42.522083              -42.522083                 [anchor_bead, TN6d]       [anchor_bead, TC1, TC1, TC1, TC1, TC1]
+1             1.0725                   189.510224              -69.206405              -69.206405  [anchor_bead, TC4, SN3a, TC4, SP2]  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]
+   performance_score
+0            16.3078
+1             1.0725
+0    16.3078
+1     1.0725
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 8
+Starting iteration 8
+Finished iteration 9
+Continuing: No performance score is greater than 9.
+Index(['model_policy_dict_hydro', 'beads_hydro', 'smiles_hydro',
+       'model_path_hydro', 'model_policy_dict_lipo', 'beads_lipo',
+       'smiles_lipo', 'model_path_lipo', 'beads_hydro_ph_8',
+       'smiles_hydro_ph_8', 'beads_lipo_ph_8', 'smiles_lipo_ph_8',
+       'beads_hydro_ph_4', 'smiles_hydro_ph_4', 'beads_lipo_ph_4',
+       'smiles_lipo_ph_4', 'Performance_siRNA_pH_4', 'Performance_siRNA_pH_8',
+       'Performance_double_membrane', 'performance_score', 'beads_hydro_tuple',
+       'beads_lipo_tuple'],
+      dtype='object')
+   performance_score  Performance_double_membrane  ...                                  beads_hydro                              beads_lipo
+0          16.307800                   140.030438  ...                          [anchor_bead, TN6d]  [anchor_bead, TC1, TC1, TC1, TC1, TC1]
+1           0.190317                   200.745099  ...  [anchor_bead, SN3a, SN3a, SN3a, SN3a, SN3a]  [anchor_bead, TC1, TC1, TC1, TC1, TC1]
+
+[2 rows x 6 columns]
+   performance_score
+0          16.307800
+1           0.190317
+0    16.307800
+1     0.190317
+Name: performance_score, dtype: float64
+Starting Challenges in iteration 9
+Starting iteration 9
+Finished iteration 10
+Success: At least one performance score is greater than 9.
