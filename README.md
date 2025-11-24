@@ -19,6 +19,9 @@ The workflow appears to involve generating polymer sidechains using RL, evaluati
 
 To set up the environment for this project, install the required Python packages using the `requirements.txt` file:
 
+
+**Note:** It is strongly recommended to use a virtual environment (such as `venv` or `conda`) before installing dependencies.
+
 ```bash
 pip install -r requirements.txt
 ```
