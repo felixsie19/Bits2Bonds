@@ -19,7 +19,7 @@ import psutil
 import shutil
 import traceback
 import signal
-from multithread import kill_processes_by_name
+from multithread2 import kill_processes_by_name
 
 binary_name=sys.argv[3]
 

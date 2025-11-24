@@ -31,7 +31,7 @@ from stable_baselines3 import DQN
 from rdkit.Chem import Draw
 import torch
 import torch_geometric
-from . import bead_exchanger
+from .import bead_exchanger
 import pandas as pd
 import pickle
 from datetime import datetime
@@ -60,9 +60,7 @@ class new_GA:
 #
         # Exporting to CSV
         write_header = not os.path.exists("data/lead_output.csv")
-
         lead.to_csv("data/lead_output.csv", mode='a', header=write_header, index=False, sep=',')
-
 
     def mutate(self,fill_nr, mutate_strength):
         """

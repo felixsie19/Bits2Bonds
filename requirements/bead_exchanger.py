@@ -1,6 +1,6 @@
 import copy
 import random
-from .import PkaPred
+from . import PkaPred
 from .PkaPred import GCN
 import torch
 import pandas as pd

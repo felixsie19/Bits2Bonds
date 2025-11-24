@@ -198,7 +198,6 @@ class MoleculeDesigner:
                     atoms = mol.GetAtoms()
                     mol.AddBond(0, 31+mol1.GetNumAtoms(), order=Chem.BondType.SINGLE)
                     img=Draw.MolToImage(mol,size=(800,600))
-                    img.save("results/lead_0.png") 
                     #img.show()
                     lead=False
                 if show_mol=="always":

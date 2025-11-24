@@ -1,12 +1,12 @@
 import subprocess
 import os.path
-from utils import new_GA
+import pandas as pd
+from utils.ga import new_GA
 from utils import rl
 from utils import make_pdf
-import pandas as pd
-from utils import exchange_beads
+from utils.bead_exchanger import exchange_beads
+from utils.sa_score_calculator import apply_sa_score_penalty
 import sys
-
 
 ##################Set Name of Gromacs Binary##########################
 
@@ -40,7 +40,6 @@ with open(output_file, 'w') as f:
     df=exchange_beads(8,df,0.5)
     df=exchange_beads(4,df,0.5)
     df.to_pickle("./data/DFfromRL.pkl")
-
 ## 2. Check for the presence of 'model1.pkl'
     for i in range(0,50):
 
@@ -59,21 +58,18 @@ with open(output_file, 'w') as f:
 #
 #
         ## Load the dataframe and remove duplicates initially
-        df = pd.read_pickle("./data/DFfromRL.pkl")
+        df = pd.read_pickle("data/DFfromRL.pkl")
     
         # Check if the 'performance_score' column exists
         if 'performance_score' not in df.columns:
-            print("Error: 'performance_score' column not found in the dataFrame.")
+            print("Error: 'performance_score' column not found in the DataFrame.")
             sys.exit(1)  # Exit with an error code (non-zero)
     
         # Check if *any* value in the 'performance_score' column is greater than 9
-        if (df['performance_score'] > 17).any():
+        if (df['performance_score'] > 24).any():
             print("Success: At least one performance score is greater than 9.")
             df[['performance_score', 'Performance_siRNA_pH_4', 'Performance_double_membrane', 'Performance_siRNA_pH_8',
-               'beads_hydro', 'beads_lipo']].to_csv(f"./data/output_df_episode_{i}.csv")
-            
-            #make PDF
-            make_pdf.make_pdf_file(i)
+               'beads_hydro', 'beads_lipo']].to_csv(f"output_df_episode_{i}.csv")
             sys.exit(0)  # Exit with a success code (0)
         else:
             print("Continuing: No performance score is greater than 9.")

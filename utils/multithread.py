@@ -5,16 +5,16 @@ import time
 import os
 import signal
 import psutil
+import sys
 import numpy as np
 from scipy.stats import trim_mean, iqr
-import sys
+from sa_score_calculator import apply_sa_score_penalty
 
-
-binary_name = sys.argv[1]
+binary_name=sys.argv[1]
 iteration_number = int(os.environ.get('ITERATION_NUMBER'))
 def process_iteration(iteration_num, run):
     try:
-        args = ["python3", "./utils/chains.py", str(iteration_num), str(run),binary_name]
+        args = ["python3", "./utils/chains.py", str(iteration_num), str(run),str(binary_name)]
         print(f"Starting process for iteration {iteration_num}, run {run}: {args}")
         # Create the subprocess with a timeout
         process = subprocess.Popen(args)
@@ -120,8 +120,13 @@ if __name__ == "__main__":
     y = df_filled['Performance_siRNA_pH_8']
     z = df_filled['Performance_double_membrane']
 
-    df_filled["performance_score"]=29.6052 * np.exp(-((x - (-40))**2 / (2 * 30**2) + (z - 155)**2 / (2 * 15**2) + (y - (-40))**2 / (2 * 25**2)))
-
+    df_filled["performance_score"]=29.6052 * np.exp(-((x - (-40))**2 / (2 * 30**2) + (z - 155)**2 / (2 * 15**2) + (y - (-40))**2 / (2 * 25**2)))    #Gaussian_Reward = 37.3917 * exp(-((x - (-40))^2 / (2 * 30^2) + (z - 155)^2 / (2 * 15^2) + (y - (-40))^2 / (2 * 25^2)))
+    # --- NEW: APPLY SA SCORE PENALTY HERE ---
+    # The apply_sa_score_penalty function is imported from sa_score_calculator.py
+    print("\n--- Applying Synthesizability Penalty ---")
+    df_filled = apply_sa_score_penalty(df_filled, 'beads_hydro', 'performance_score')
+    df_filled = apply_sa_score_penalty(df_filled, 'beads_lipo', 'performance_score')
+    print("--- Penalty application complete ---\n")
 
     ############ Conversion block
     
@@ -143,7 +148,7 @@ if __name__ == "__main__":
         raise ValueError("The DataFrame does not contain a 'performance_score' column.")
 
 
-
+    
     # Save the filtered DataFrame back to a pickle file
     df_filtered.to_pickle("data/DFfromRL.pkl")
     print(df_filtered["performance_score"])
