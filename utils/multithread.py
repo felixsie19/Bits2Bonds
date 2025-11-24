@@ -10,7 +10,7 @@ import numpy as np
 from scipy.stats import trim_mean, iqr
 from sa_score_calculator import apply_sa_score_penalty
 
-binary_name=sys.arg[1]
+binary_name=sys.argv[1]
 iteration_number = int(os.environ.get('ITERATION_NUMBER'))
 def process_iteration(iteration_num, run):
     try:
