@@ -8,7 +8,7 @@ import psutil
 import sys
 import numpy as np
 from scipy.stats import trim_mean, iqr
-from .import apply_sa_score_penalty
+from sa_score_calculator import apply_sa_score_penalty
 
 binary_name=sys.arg[1]
 iteration_number = int(os.environ.get('ITERATION_NUMBER'))
