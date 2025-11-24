@@ -5,6 +5,7 @@ from utils import new_GA
 from utils import rl
 from utils import make_pdf
 from utils import exchange_beads
+from utils import apply_sa_score_penalty
 import sys
 
 ##################Set Name of Gromacs Binary##########################
