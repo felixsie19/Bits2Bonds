@@ -26,7 +26,7 @@ binary_name=sys.argv[3]
 with open('data/DFfromRL.pkl', 'rb') as f:
     data = pickle.load(f)
 
-df = pd.dataFrame(data)
+df = pd.DataFrame(data)
 
 # Initialize or set default values
 lipo_beads = None
