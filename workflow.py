@@ -57,7 +57,7 @@ with open(output_file, 'w') as f:
 #
 #
         ## Load the dataframe and remove duplicates initially
-        df = pd.read_pickle("DFfromRL.pkl")
+        df = pd.read_pickle("data/DFfromRL.pkl")
     
         # Check if the 'performance_score' column exists
         if 'performance_score' not in df.columns:
