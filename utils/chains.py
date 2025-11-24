@@ -23,10 +23,10 @@ from multithread import kill_processes_by_name
 
 binary_name=sys.argv[3]
 
-with open('.data/DFfromRL.pkl', 'rb') as f:
+with open('data/DFfromRL.pkl', 'rb') as f:
     data = pickle.load(f)
 
-df = pd.DataFrame(data)
+df = pddataFrame(data)
 
 # Initialize or set default values
 lipo_beads = None
