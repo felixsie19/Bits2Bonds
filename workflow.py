@@ -1,6 +1,5 @@
 import subprocess
 import os.path
-import rl
 import pandas as pd
 from utils import new_GA
 from utils import rl
